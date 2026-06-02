@@ -24,7 +24,7 @@ jobs:
         run: npm install
 
       - name: Create ZIP Package
-        run: zip -r function.zip .
+        run: cd server && zip -r function.zip .
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -42,4 +42,4 @@ jobs:
         run: |
           aws lambda update-function-code \
           --function-name createTodo \
-          --zip-file fileb://function.zip
+          --zip-file fileb://server/function.zip
