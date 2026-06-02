@@ -8,7 +8,6 @@ branches:
 jobs:
 deploy:
 
-```
 runs-on: ubuntu-latest
 
 steps:
@@ -55,4 +54,3 @@ steps:
 
   - name: Deployment Success
     run: echo "Lambda deployed successfully"
-```
