@@ -21,3 +21,5 @@ client/*.local
 *.njsproj
 *.sln
 *.sw?
+
+server/node_modules
