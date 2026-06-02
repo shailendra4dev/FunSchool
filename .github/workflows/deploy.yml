@@ -7,11 +7,9 @@ branches:
 
 jobs:
 deploy:
-
 runs-on: ubuntu-latest
 
 steps:
-
   - name: Checkout Repository
     uses: actions/checkout@v4
 
@@ -24,7 +22,7 @@ steps:
     run: node -v
 
   - name: Install ZIP Utility
-    run: sudo apt-get update && sudo apt-get install zip -y
+    run: sudo apt-get update && sudo apt-get install -y zip
 
   - name: Install Dependencies
     run: npm ci
@@ -32,11 +30,10 @@ steps:
   - name: Remove Old ZIP
     run: rm -f function.zip
 
-  - name: Create Lambda ZIP Package
+  - name: Create ZIP Package
     run: |
-      cd server && zip -r function.zip . \
+      zip -r function.zip . \
       -x "*.git*" \
-      -x "node_modules/.cache/*" \
       -x ".github/*"
 
   - name: Configure AWS Credentials
@@ -49,8 +46,8 @@ steps:
   - name: Deploy Lambda Function
     run: |
       aws lambda update-function-code \
-      --function-name createTodo \
-      --zip-file fileb://function.zip
+        --function-name createTodo \
+        --zip-file fileb://function.zip
 
   - name: Deployment Success
     run: echo "Lambda deployed successfully"
