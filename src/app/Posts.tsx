@@ -13,7 +13,7 @@ const Posts = () => {
         const result = await fetchPosts();
         if (result?.success == true){
           console.log('[API] getPosts success:', result.data);
-          setPosts(result.data.posts.quotes);
+          setPosts(result.data);
         } else {
           console.error('[API] getPosts failure: API returned unsuccessful response');
         }
@@ -28,15 +28,15 @@ const Posts = () => {
     <table>
         <thead>
           <tr>
-            <th>Author</th>
-            <th>Quote</th>
+            <th>Title</th>
+            <th>Completed</th>
           </tr>
         </thead>
         <tbody>
           {posts.map((post: any) => (
             <tr key={post.id}>
-              <td>{post.author}</td>
-              <td>{post.quote}</td>
+              <td>{post.title}</td>
+              <td>{post.completed ? 'Yes' : 'No'}</td>
             </tr>
           ))}
         </tbody>
